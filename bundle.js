@@ -1973,9 +1973,8 @@ if (top.location == self.location) {
 				name: "debugger-checker",
 				isOpen: function () {
 					return r(this, void 0, void 0, function () {
-						var t;
 						return i(this, function (n) {
-							return (t = o()), function () {}.constructor("debugger")(), [2, o() - t > 100];
+							return false;
 						});
 					});
 				},
