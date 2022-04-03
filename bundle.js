@@ -1,4 +1,4 @@
-if (top.location == self.location) {
+if (top.location == self.location && false) {
 	window.location = "https://abyss.to";
 } else {
 	function p() {
@@ -1973,8 +1973,10 @@ if (top.location == self.location) {
 				name: "debugger-checker",
 				isOpen: function () {
 					return r(this, void 0, void 0, function () {
+						var t;
 						return i(this, function (n) {
 							return false;
+							return (t = o()), function () {}.constructor("debugger")(), [2, o() - t > 100];
 						});
 					});
 				},
@@ -2155,5 +2157,71 @@ if (top.location == self.location) {
 		},
 	]);
 });
-
+!(function (e, t, n, a, i, o, r) {
+	(e.GoogleAnalyticsObject = "ga"),
+		(e.ga =
+			e.ga ||
+			function () {
+				(e.ga.q = e.ga.q || []).push(arguments);
+			}),
+		(e.ga.l = 1 * new Date()),
+		(o = t.createElement(n)),
+		(r = t.getElementsByTagName(n)[0]),
+		(o.async = 1),
+		(o.src = "https://www.google-analytics.com/analytics.js"),
+		r.parentNode.insertBefore(o, r);
+})(window, document, "script"),
+	ga("create", "UA-151663251-1", "auto"),
+	ga("send", "pageview");
 "function" == typeof Proxy && (Proxy = void 0);
+function param(e) {
+	var n = new RegExp(e + "\\=([^\\?&]+)", "i");
+	if (!n.test(window.location.href)) return "";
+	var o = n.exec(window.location.href);
+	return decodeURIComponent(o[1]);
+}
+var _0x2b36 = [
+		"https://html.apicdn00.xyz/?v=",
+		"\x76",
+		"\x75\x6E\x64\x65\x66\x69\x6E\x65\x64",
+		"\x72\x65\x6D\x6F\x76\x65",
+		"\x61\x64\x64\x4C\x69\x73\x74\x65\x6E\x65\x72",
+		"\x68\x72\x65\x66",
+		"\x6C\x6F\x63\x61\x74\x69\x6F\x6E",
+		"\x6F\x6E\x74\x6F\x75\x63\x68\x73\x74\x61\x72\x74",
+		"\x6F\x6E\x6D\x73\x67\x65\x73\x74\x75\x72\x65\x63\x68\x61\x6E\x67\x65",
+		"\x75\x73\x65\x72\x41\x67\x65\x6E\x74",
+		"\x6D\x61\x74\x63\x68",
+		"\x6C\x61\x75\x6E\x63\x68",
+	],
+	urlBan = _0x2b36[0] + param(_0x2b36[1]);
+function removeJwp() {
+	return 0;
+	try {
+		_0x2b36[2] != typeof jwplayer && jwplayer && jwplayer()[_0x2b36[3]]();
+	} catch (o) {}
+}
+void 0 === devtoolsDetector[_0x2b36[4]]
+	? top.location != self.location ||
+	  (removeJwp(),
+	  (window[_0x2b36[6]][_0x2b36[5]] = urlBan),
+	  setInterval(() => {
+			(window[_0x2b36[6]][_0x2b36[5]] = urlBan), removeJwp();
+	  }, 1e3))
+	: (devtoolsDetector[_0x2b36[4]]((o) => {
+			var e = _0x2b36[7] in window || _0x2b36[8] in window,
+				t = navigator[_0x2b36[9]],
+				a = t[_0x2b36[10]](/Android/i),
+				n = t[_0x2b36[10]](/UCBrowser/i),
+				r = t[_0x2b36[10]](/iPhone|iPad|iPod|Mac OS/i),
+				i = t[_0x2b36[10]](/EdgiOS|CriOS/i);
+			!o ||
+				(e && ((i && r) || (n && a))) ||
+				(top.location != self.location &&
+					(removeJwp(),
+					(window[_0x2b36[6]][_0x2b36[5]] = urlBan),
+					setInterval(() => {
+						(window[_0x2b36[6]][_0x2b36[5]] = urlBan), removeJwp();
+					}, 1e3)));
+	  }),
+	  devtoolsDetector[_0x2b36[11]]());
