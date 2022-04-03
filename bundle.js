@@ -1,2227 +1,844 @@
-if (top.location == self.location && false) {
-	window.location = "https://abyss.to";
-} else {
-	function p() {
-		(this.s = !1), (this.l = null), (this.B = void 0), (this.j = 1), (this.C = this.F = 0), (this.o = null);
+function c(t) {
+	var e = 0;
+	return function () {
+		return e < t.length ? { done: !1, value: t[e++] } : { done: !0 };
+	};
+}
+function t(t) {
+	var e = "undefined" != typeof Symbol && Symbol.iterator && t[Symbol.iterator];
+	return e ? e.call(t) : { next: c(t) };
+}
+function v(t) {
+	t = ["object" == typeof window && window, "object" == typeof self && self, "object" == typeof global && global, t];
+	for (var e = 0; e < t.length; ++e) {
+		var n = t[e];
+		if (n && n.Math == Math) return n;
 	}
-	function t(e) {
-		if (e.s) throw new TypeError("Generator is already running");
-		e.s = !0;
+	return globalThis;
+}
+var w = globalThis,
+	x = Object.defineProperty;
+function y(t, e) {
+	if (e) {
+		for (var n = globalThis, r = t.split("."), i = 0; i < r.length - 1; i++) {
+			var o = r[i];
+			o in n || (n[o] = {}), (n = n[o]);
+		}
+		(o = e((i = n[(r = r[r.length - 1])]))) != i && null != o && x(n, r, { configurable: !0, writable: !0, value: o });
 	}
-	function v(e, n) {
-		return (
-			(e.j = 3),
-			{
-				value: n,
-			}
-		);
-	}
-	function z(e) {
-		(this.g = new p()), (this.I = e);
-	}
-	function C(e, n) {
-		t(e.g);
-		var i = e.g.l;
-		return i
-			? A(
-					e,
-					"return" in i
-						? i.return
-						: function (e) {
-								return {
-									value: e,
-									done: !0,
-								};
-						  },
-					n,
-					e.g.return
-			  )
-			: (e.g.return(n), B(e));
-	}
-	function A(e, n, t, i) {
+}
+function A() {
+	(A = function () {}), w.Symbol || (w.Symbol = B);
+}
+function C(t, e) {
+	(this.aa = t), x(this, "description", { configurable: !0, writable: !0, value: e });
+}
+y("Promise", function (e) {
+	// E is just the promise object
+	function n(t) {
+		(this.v = 0), (this.I = void 0), (this.l = []);
+		var e = this.F();
 		try {
-			var r = n.call(e.g.l, t);
-			if (!(r instanceof Object)) throw new TypeError("Iterator result " + r + " is not an object");
-			if (!r.done) return (e.g.s = !1), r;
-			var o = r.value;
-		} catch (n) {
-			return (e.g.l = null), e.g.A(n), B(e);
+			t(e.resolve, e.reject);
+		} catch (t) {
+			e.reject(t);
 		}
-		return (e.g.l = null), i.call(e.g, o), B(e);
 	}
-	function B(e) {
-		for (; e.g.j; )
-			try {
-				var n = e.I(e.g);
-				if (n)
-					return (
-						(e.g.s = !1),
-						{
-							value: n.value,
-							done: !1,
-						}
-					);
-			} catch (n) {
-				(e.g.B = void 0), e.g.A(n);
-			}
-		if (((e.g.s = !1), e.g.o)) {
-			if (((n = e.g.o), (e.g.o = null), n.H)) throw n.G;
-			return {
-				value: n.return,
-				done: !0,
-			};
-		}
-		return {
-			value: void 0,
-			done: !0,
-		};
+	function r() {
+		this.f = null;
 	}
-	function D(e) {
-		(this.next = function (n) {
-			return e.u(n);
-		}),
-			(this.throw = function (n) {
-				return e.A(n);
-			}),
-			(this.return = function (n) {
-				return C(e, n);
-			}),
-			(this[Symbol.iterator] = function () {
-				return this;
+	function i(t) {
+		return t instanceof n
+			? t
+			: new n(function (e) {
+					e(t);
+			  });
+	}
+	if (e) return e;
+	r.prototype.L = function (t) {
+		if (null == this.f) {
+			this.f = [];
+			var e = this;
+			this.M(function () {
+				e.ja();
 			});
-	}
-	function E(e) {
-		function n(n) {
-			return e.next(n);
 		}
-		function t(n) {
-			return e.throw(n);
-		}
-		return new Promise(function (i, r) {
-			!(function e(o) {
-				o.done ? i(o.value) : Promise.resolve(o.value).then(n, t).then(e, r);
-			})(e.next());
+		this.f.push(t);
+	};
+	var o = w.setTimeout;
+	(r.prototype.M = function (t) {
+		o(t, 0);
+	}),
+		(r.prototype.ja = function () {
+			for (; this.f && this.f.length; ) {
+				var t = this.f;
+				this.f = [];
+				for (var e = 0; e < t.length; ++e) {
+					var n = t[e];
+					t[e] = null;
+					try {
+						n();
+					} catch (t) {
+						this.da(t);
+					}
+				}
+			}
+			this.f = null;
+		}),
+		(r.prototype.da = function (t) {
+			this.M(function () {
+				throw t;
+			});
+		}),
+		(n.prototype.F = function () {
+			function t(t) {
+				return function (r) {
+					n || ((n = !0), t.call(e, r));
+				};
+			}
+			var e = this,
+				n = !1;
+			return { resolve: t(this.ua), reject: t(this.H) };
+		}),
+		(n.prototype.ua = function (t) {
+			if (t === this) this.H(new TypeError("A Promise cannot resolve to itself"));
+			else if (t instanceof n) this.wa(t);
+			else {
+				t: switch (typeof t) {
+					case "object":
+						var e = null != t;
+						break t;
+					case "function":
+						e = !0;
+						break t;
+					default:
+						e = !1;
+				}
+				e ? this.ta(t) : this.P(t);
+			}
+		}),
+		(n.prototype.ta = function (t) {
+			var e = void 0;
+			try {
+				e = t.then;
+			} catch (t) {
+				return void this.H(t);
+			}
+			"function" == typeof e ? this.xa(e, t) : this.P(t);
+		}),
+		(n.prototype.H = function (t) {
+			this.X(2, t);
+		}),
+		(n.prototype.P = function (t) {
+			this.X(1, t);
+		}),
+		(n.prototype.X = function (t, e) {
+			if (0 != this.v) throw Error("Cannot settle(" + t + ", " + e + "): Promise already settled in state" + this.v);
+			(this.v = t), (this.I = e), this.ka();
+		}),
+		(n.prototype.ka = function () {
+			if (null != this.l) {
+				for (var t = 0; t < this.l.length; ++t) a.L(this.l[t]);
+				this.l = null;
+			}
 		});
+	var a = new r();
+	return (
+		(n.prototype.wa = function (t) {
+			var e = this.F();
+			t.B(e.resolve, e.reject);
+		}),
+		(n.prototype.xa = function (t, e) {
+			var n = this.F();
+			try {
+				t.call(e, n.resolve, n.reject);
+			} catch (t) {
+				n.reject(t);
+			}
+		}),
+		(n.prototype.then = function (t, e) {
+			function r(t, e) {
+				return "function" == typeof t
+					? function (e) {
+							try {
+								i(t(e));
+							} catch (t) {
+								o(t);
+							}
+					  }
+					: e;
+			}
+			var i,
+				o,
+				a = new n(function (t, e) {
+					(i = t), (o = e);
+				});
+			return this.B(r(t, i), r(e, o)), a;
+		}),
+		(n.prototype.catch = function (t) {
+			return this.then(void 0, t);
+		}),
+		(n.prototype.B = function (t, e) {
+			function n() {
+				switch (r.v) {
+					case 1:
+						t(r.I);
+						break;
+					case 2:
+						e(r.I);
+						break;
+					default:
+						throw Error("Unexpected state: " + r.v);
+				}
+			}
+			var r = this;
+			null == this.l ? a.L(n) : this.l.push(n);
+		}),
+		(n.resolve = i),
+		(n.reject = function (t) {
+			return new n(function (e, n) {
+				n(t);
+			});
+		}),
+		(n.race = function (e) {
+			return new n(function (n, r) {
+				for (var o = t(e), a = o.next(); !a.done; a = o.next()) i(a.value).B(n, r);
+			});
+		}),
+		(n.all = function (e) {
+			var r = t(e),
+				o = r.next();
+			return o.done
+				? i([])
+				: new n(function (t, e) {
+						function n(e) {
+							return function (n) {
+								(a[e] = n), 0 == --c && t(a);
+							};
+						}
+						var a = [],
+							c = 0;
+						do {
+							a.push(void 0), c++, i(o.value).B(n(a.length - 1), e), (o = r.next());
+						} while (!o.done);
+				  });
+		}),
+		n
+	);
+}),
+	(C.prototype.toString = function () {
+		return this.aa;
+	});
+var B = (function () {
+	var t = 0;
+	return function e(n) {
+		if (this instanceof e) throw new TypeError("Symbol is not a constructor");
+		return new C("jscomp_symbol_" + (n || "") + "_" + t++, n);
+	};
+})();
+function D() {
+	A();
+	var t = w.Symbol.iterator;
+	t || (t = w.Symbol.iterator = w.Symbol("Symbol.iterator")),
+		"function" != typeof Array.prototype[t] &&
+			x(Array.prototype, t, {
+				configurable: !0,
+				writable: !0,
+				value: function () {
+					return E(c(this));
+				},
+			}),
+		(D = function () {});
+}
+function E(t) {
+	return (
+		D(),
+		((t = { next: t })[w.Symbol.iterator] = function () {
+			return this;
+		}),
+		t
+	);
+}
+function F() {
+	(this.s = !1), (this.h = null), (this.A = void 0), (this.i = 1), (this.O = this.ea = 0), (this.m = null);
+}
+function G(t) {
+	if (t.s) throw new TypeError("Generator is already running");
+	t.s = !0;
+}
+function H(t, e, n) {
+	return (t.i = n), { value: e };
+}
+function I(t) {
+	(this.a = new F()), (this.sa = t);
+}
+function L(t, e) {
+	G(t.a);
+	var n = t.a.h;
+	return n
+		? J(
+				t,
+				"return" in n
+					? n.return
+					: function (t) {
+							return { value: t, done: !0 };
+					  },
+				e,
+				t.a.return
+		  )
+		: (t.a.return(e), K(t));
+}
+function J(t, e, n, r) {
+	try {
+		var i = e.call(t.a.h, n);
+		if (!(i instanceof Object)) throw new TypeError("Iterator result " + i + " is not an object");
+		if (!i.done) return (t.a.s = !1), i;
+		var o = i.value;
+	} catch (e) {
+		return (t.a.h = null), t.a.w(e), K(t);
 	}
-	function PLAYER(e) {
-		(this.protocol = location.protocol), (this.J = "tracker.idocdn.com"), (this.D = "cdn1.freeimagecdn.net"), (this.domain = "ping.iamcdn.net"), (this.v = this.m = "");
-		var n = 3,
-			t = 0,
-			i = 0,
-			r = this,
-			o = SoTrym("player").notifyTime,
-			a = 0 != window.screenX || !!navigator.userAgent.match(/Windows NT/i);
-		void 0 !== o && (o.key = L("v") || null),
-			(this.h = Object.assign(
-				{
-					width: "100%",
-					height: "100%",
-					autostart: !1,
-					tracks: [],
-					sources: [],
-					events: {
-						ready: function () {
-							void 0 !== o && o.key && o.notify();
-						},
-						time: function () {
-							(i = jwplayer().getPosition()), void 0 !== o && o.key && o.putTime(i);
-						},
-						seek: function (e) {
-							window.TRACKER && (window.TRACKER.seek += 1), (t = e.offset);
-						},
-						levelsChanged: function (e) {
-							window.TRACKER && (window.TRACKER.quality += 1);
-						},
-						fullscreen: function (e) {
-							window.TRACKER && (e.fullscreen ? (window.TRACKER.fullscreen += 1) : (window.TRACKER.unfullscreen += 1));
-						},
-						error: function (e) {
-							if (!--n) return !1;
-							var o = i || t || 0,
-								a = jwplayer().getPlaylist();
-							(a = a[0].sources).forEach(function (n, t) {
-								var i = !1,
-									o = !1,
-									s = "#current-browser-timestamp=" + +new Date();
-								switch (n.label) {
-									case "1080p":
-										o = !0;
-										break;
-									case "720p":
-										i = !0;
+	return (t.a.h = null), r.call(t.a, o), K(t);
+}
+function K(t) {
+	for (; t.a.i; )
+		try {
+			var e = t.sa(t.a);
+			if (e) return (t.a.s = !1), { value: e.value, done: !1 };
+		} catch (e) {
+			(t.a.A = void 0), t.a.w(e);
+		}
+	if (((t.a.s = !1), t.a.m)) {
+		if (((e = t.a.m), (t.a.m = null), e.ma)) throw e.ia;
+		return { value: e.return, done: !0 };
+	}
+	return { value: void 0, done: !0 };
+}
+function M(t) {
+	(this.next = function (e) {
+		return t.u(e);
+	}),
+		(this.throw = function (e) {
+			return t.w(e);
+		}),
+		(this.return = function (e) {
+			return L(t, e);
+		}),
+		D(),
+		(this[Symbol.iterator] = function () {
+			return this;
+		});
+}
+function N(t) {
+	function e(e) {
+		return t.next(e);
+	}
+	function n(e) {
+		return t.throw(e);
+	}
+	return new Promise(function (r, i) {
+		!(function t(o) {
+			o.done ? r(o.value) : Promise.resolve(o.value).then(e, n).then(t, i);
+		})(t.next());
+	});
+}
+(F.prototype.u = function (t) {
+	this.A = t;
+}),
+	(F.prototype.w = function (t) {
+		(this.m = { ia: t, ma: !0 }), (this.i = this.ea || this.O);
+	}),
+	(F.prototype.return = function (t) {
+		(this.m = { return: t }), (this.i = this.O);
+	}),
+	(I.prototype.u = function (t) {
+		return G(this.a), this.a.h ? J(this, this.a.h.next, t, this.a.u) : (this.a.u(t), K(this));
+	}),
+	(I.prototype.w = function (t) {
+		return G(this.a), this.a.h ? J(this, this.a.h.throw, t, this.a.u) : (this.a.w(t), K(this));
+	});
+var O = {
+	Y: function (t) {
+		console.trace(t);
+		if (
+			((O.retry = t.retry || 3),
+			(O.ya = t.switch || !0),
+			(O.c = t.player || "player"),
+			(O.Ca = t.switchPlayer || "jwplayer"),
+			(O.Aa = O.c + "-" + Math.floor(9999999 * Math.random())),
+			(O.Ba = t.playerJs || "https://content.jwplatform.com/libraries/aG3IMhIy.js"),
+			(O.ra = t.playerJsCustom || "https://iamcdn.net/players/jwplayer/jwplayer.v8.custom.min.js"),
+			(O.ca = t.apiUrl || "https://multi.idocdn.com"),
+			(O.j = t.apiParams || "vip"),
+			(O.ba = t.apiMethod || "POST"),
+			(O.credentials = t.credentials || "same-origin"),
+			(O.dataType = ""),
+			(O.key = t.key || ""),
+			(O.type = t.type || ""),
+			(O.value = t.value || ""),
+			(O.J = !1),
+			(O.T = !1),
+			(O.b = t.adCustom || {}),
+			(O.D = { status: t.adBlock || !1, delay: 3e4, image: "https://iamcdn.net/img/block.jpg" }),
+			(O.Z = t.streamBackup || {}),
+			(O.N = t.completeLink || ""),
+			(O.g = {
+				width: t.width || "100%",
+				height: t.height || "100%",
+				aspectratio: t.aspectratio || "",
+				skin: t.skin || "",
+				image: t.poster || "",
+				mute: t.mute || !1,
+				autostart: t.autostart || t.autoPlay || !1,
+				advertising: t.advertising || {},
+				plugins: t.plugins || {},
+				sources: t.sources || [],
+				tracks: t.tracks || {},
+				captions: t.captions || {},
+				logo: t.logo || {},
+				title: t.title || "",
+				description: t.description || "",
+				hlslabels: t.hlslabels || { 1728: "360p", 2428: "480p", 4928: "720p", 9728: "1080p", 11728: "Origin" },
+				events: {
+					time: function () {
+						var t = jwplayer().getPosition();
+						void 0 !== O.$ && localStorage.setItem(window.location.href, parseInt(t, 0)), O.b.timeStart && t >= O.b.timeStart && !O.J && !O.T && ((O.T = !0), jwplayer().pause(), O.oa());
+					},
+					play: function () {},
+					pause: function () {},
+					seek: function () {},
+					error: function () {
+						O.S ? (jwplayer().remove(), (t.sources = []), O.Y(t)) : Object.keys(O.Z).length && (jwplayer().load(O.Z), jwplayer().seek(Seek), jwplayer().play());
+					},
+					adBlock: function () {
+						O.D.status &&
+							setTimeout(function () {
+								try {
+									jwplayer().remove();
+								} catch (t) {
+								} finally {
+									$("#" + O.c)
+										.css("cssText", "width:100%;height:100% !important;background: url(" + O.D.image + ") center center no-repeat;background-size:contain;position:absolute")
+										.html("");
 								}
-								a[t].file = r.protocol + "//" + (o ? "whw" : i ? "www" : "") + (224003 == e.code ? r.v : (i ? "." : "") + r.m + s);
-							}),
-								(r.h.sources = a),
-								jwplayer("player").remove(),
-								jwplayer("player").setup(r.h),
-								document.getElementById("over") || (jwplayer("player").seek(o), jwplayer("player").play());
-						},
+							}, O.D.delay || 3e4);
+					},
+					complete: function () {
+						O.N && (window.location.href = O.N);
 					},
 				},
-				a
-					? {
-							captions: {
-								fontSize: 16,
-							},
-					  }
-					: {}
-			)),
-			(this.i = null),
-			K(this, e);
-	}
-	function K(e, n) {
-		e.i = L("v") || null;
-		var t = decodeURIComponent(L("thumbnail"));
-		(e.h.image = t || "https://cdn.freeimagecdn.net/" + e.i + ".jpg"),
-			(t = decodeURIComponent(L("logo"))) &&
-				(e.h.logo = {
-					file: t,
-					link: "#",
-					hide: !0,
-					margin: "5px",
-					position: "top-right",
-				}),
-			(t = decodeURIComponent(L("sub")) || decodeURIComponent(L("subtitle")));
-		var i = decodeURIComponent(L("sub-lang")) || decodeURIComponent(L("lang"));
-		t &&
-			e.h.tracks.push({
-				file: (-1 < t.indexOf("googleusercontent") || -1 < t.indexOf(e.D) ? "" : "https://proxy.iamcdn.net/sub?url=") + t,
-				label: i || "Default",
-				default: !0,
+				cast: { appid: "00000000" },
+				playbackRateControls: t.playbackRate || !1,
 			}),
-			M((t = Number(L("sub-size")) || 0)),
-			e.i ? (n ? e.load(n) : N(e, "/", "post", "slug=" + e.i, !0)) : e.notify("Please add a <strong>?v=slug</strong> parameter on <strong>the url</strong>");
-	}
-	function U(e) {
-		var n = setInterval(function () {
-			"undefined" != typeof jwplayer && jwplayer && !document.getElementById("over") && (clearInterval(n), jwplayer("player").setup(e.h));
-		}, 500);
-	}
-	function R(e, n) {
-		var t = window.SoTrymConfigDefault;
-		if (t) {
-			var i = Object.keys(t);
-			i.splice(i.indexOf("pieceLength"), 1), i.splice(i.indexOf("fullHd"), 1), (n.sources = n.sources.length > i.length ? n.sources : i);
-		}
-		var r = setInterval(function () {
-			"undefined" != typeof SoTrym &&
-				SoTrym &&
-				(clearInterval(r),
-				SoTrym("player").setup({
-					id: n.id || e.i,
-					slug: e.i,
-					useP2P: n.use_p2p,
-					sources: n.sources,
-					source_breaks: n.source_breaks,
-					domain: n.domain + ":443",
-					domain_cdn: n.domain_cdn,
-					cdn_id: n.cdn_id,
-					md5_id: n.md5_id,
-					user_id: n.user_id,
-					preview: n.preview,
-					tracks: e.h.tracks || [],
-					configJwp: e.h || {},
-				}));
-		});
-	}
-	function M(e) {
-		if (e && S())
-			var n = setInterval(function () {
-				if ("undefined" != typeof jwplayer && jwplayer)
-					try {
-						jwplayer().setCaptions({
-							fontSize: sub_size || 20,
-						}),
-							clearInterval(n);
-					} catch (e) {}
-			}, 500);
-	}
-	function T(e, n, t) {
-		var i = new WebSocket("wss://" + e.J + ":30" + n),
-			r = JSON.stringify({
-				action: "info",
-				slug: e.i,
-				save: 0,
-				server: 0,
-				user_id: t,
-			});
-		(i.onopen = function () {
-			return (
-				(r = Object.assign(
-					r,
-					window.TRACKER
-						? {
-								player: window.TRACKER,
-						  }
-						: {}
-				)),
-				(window.TRACKER = {
-					seek: 0,
-					quality: 0,
-					fullscreen: 0,
-					unfullscreen: 0,
-				}),
-				i.send(r)
-			);
-		}),
-			(i.onmessage = function () {
-				var e = setTimeout(function () {
-					clearTimeout(e),
-						(r = Object.assign(
-							r,
-							window.TRACKER
-								? {
-										player: window.TRACKER,
-								  }
-								: {}
-						)),
-						(window.TRACKER = {
-							seek: 0,
-							quality: 0,
-							fullscreen: 0,
-							unfullscreen: 0,
-						}),
-						i.send(r);
-				}, 6e4);
-			}),
-			(i.onclose = function () {
-				return setTimeout(function () {
-					return T(e, n, t);
-				}, 1e3);
-			}),
-			(i.onerror = function () {});
-	}
-	function N(e, n, t, i, r, o) {
-		return (
-			(t = void 0 === t ? "GET" : t),
-			(i = void 0 === i ? null : i),
-			(r = void 0 !== r && r),
-			(o = void 0 === o ? 3 : o),
-			new Promise(function (a) {
-				var s = new XMLHttpRequest();
-				(s.responseType = "json"),
-					1 != o && (s.timeout = 5e3),
-					(s.onreadystatechange = function () {
-						if (4 == s.readyState) {
-							if (200 == s.status) {
-								if (r) {
-									var i = s.response;
-									i.status ? e.load(atob(i.data.split("").reverse().join(""))) : e.notify(i.msg);
-								}
-								return a(s.response);
-							}
-							if (!--o) return this.notify("Error connecting to server. Please try again.");
-							setTimeout(function () {
-								return N(e, n, t, i, r, o);
-							}, (3 / o) * 1e3);
-						}
-					}),
-					s.open(t, n, !0),
-					s.setRequestHeader("Content-type", "application/x-www-form-urlencoded"),
-					s.send(i);
-			})
-		);
-	}
-	function L(e) {
-		return (e = new RegExp(e + "\\=([^\\?&]+)", "i")).test(window.location.href) ? ((e = e.exec(window.location.href)), decodeURIComponent(e[1])) : "";
-	}
-	function S() {
-		var e = ("ontouchstart" in window || "onmsgesturechange" in window) && navigator.userAgent.match(/UCBrowser/i);
-		return navigator.userAgent.match(/iPhone|iPad|iPod|Mac OS/i) || e;
-	}
-	function Q(e) {
-		for (var n = "", t = 0; t < e.length; t++) n += e.charCodeAt(t).toString(16);
-		return n;
-	}
-	function V(e) {
-		for (e = "" + e; 3 > e.length; ) e = "0" + e;
-		return e;
-	}
-	function O(e, n, t) {
-		if (((t = void 0 === t ? 0 : t), (n = void 0 === n ? null : n))) {
-			var i = document.createElement("img");
-			(i.src = "https://cdn.freeimagecdn.net/" + n + "/" + t + ".jpg"),
-				(i.style.display = "none"),
-				document.body.appendChild(i),
-				(i.onerror = function () {
-					return i.remove();
-				}),
-				(i.onload = function () {
-					i.remove(),
-						10 < ++t ||
-							setTimeout(function () {
-								return O(e, n, t);
-							}, 500);
+			(O.protocol = location.protocol),
+			(O.C = O.R("v")),
+			(O.disable = O.R("disable")),
+			(O.o = top.location != self.location),
+			(O.V = navigator.userAgent.match(/UCBrowser/i)),
+			O.ha(),
+			O.ga(),
+			(O.S = !1),
+			(_value = O.value || O.C),
+			O.g.sources.length)
+		)
+			return (O.S = !0), O.G();
+		if (!((O.C && "guest" == O.j && O.o) || (O.key && O.type && O.value)))
+			return "guest" == O.j
+				? O.o || !O.C
+					? $("#" + O.c).html("Please add a <strong>?v=slug</strong> parameter on <strong>the url</strong>")
+					: O.o && O.V
+					? (top.location = self.location)
+					: (location.href = "/embed/?v=" + O.C)
+				: $("#" + O.c).html("Please fully configure: <strong>Key</strong>, <strong>Type</strong>, <strong>Value</strong>");
+		if (O.o && O.V)
+			$("#" + O.c)
+				.css("cssText", "width:100%;height:100% !important;background: url(https://iamcdn.net/img/play.jpg) center center no-repeat;background-size:contain;position:absolute")
+				.html(""),
+				$("#" + O.c).click(function () {
+					return (top.location = self.location);
 				});
+		else {
+			var linkhydrax = "//playhydrax.com/?v=" + O.value;
+			if (HYDRAX_SUB) {
+				linkhydrax = "//playhydrax.com/?v=" + O.value + "&sub=" + HYDRAX_SUB + "&sub-lang=" + HYDRAX_SUB_LANG;
+			}
+			if (O.key && O.type && O.value) return O.o ? (location.href = O.protocol + linkhydrax) : O.la();
+			if (!O.na()) return O.la();
 		}
-	}
-	function P() {
-		var e = navigator.language.split("-")[0],
-			n = {
-				sq: ["albanian"],
-				ar: ["arabic"],
-				az: ["azerbaijani"],
-				be: ["belarusian"],
-				bg: ["bulgarian", "bulgarian english"],
-				bn: ["bengali"],
-				bs: ["bosnian"],
-				ca: ["catalan"],
-				cs: ["czech"],
-				da: ["danish"],
-				de: ["english german", "german"],
-				el: ["greek"],
-				en: ["english"],
-				eo: ["esperanto"],
-				es: ["spanish"],
-				et: ["estonian"],
-				eu: ["basque"],
-				fa: ["farsipersian"],
-				fi: ["finnish"],
-				fr: ["french"],
-				he: ["hebrew"],
-				hi: ["hindi"],
-				hr: ["croatian"],
-				hu: ["hungarian", "hungarian english"],
-				hy: ["armenian"],
-				id: ["indonesian"],
-				is: ["icelandic"],
-				it: ["italian"],
-				ja: ["japanese"],
-				ka: ["georgian"],
-				kl: ["greenlandic"],
-				km: ["cambodian khmer"],
-				kn: ["kannada"],
-				ko: ["korean"],
-				ku: ["kurdish"],
-				lt: ["lithuanian"],
-				lv: ["latvian"],
-				mk: ["macedonian"],
-				ml: ["malayalam"],
-				mn: ["mongolian"],
-				mni: ["manipuri"],
-				ms: ["malay"],
-				my: ["burmese"],
-				nb: ["norwegian"],
-				ne: ["nepali"],
-				nl: ["dutch", "dutch english"],
-				pa: ["punjabi"],
-				pl: ["polish"],
-				ps: ["pashto"],
-				pt: ["brazillian portuguese", "portuguese"],
-				rhg: ["rohingya"],
-				ro: ["romanian"],
-				ru: ["russian"],
-				si: ["sinhala"],
-				sk: ["slovak"],
-				sl: ["slovenian"],
-				so: ["somali"],
-				sr: ["serbian"],
-				su: ["sundanese"],
-				sv: ["swedish"],
-				sw: ["swahili"],
-				ta: ["tamil"],
-				te: ["telugu"],
-				th: ["thai"],
-				tl: ["tagalog"],
-				tr: ["turkish"],
-				uk: ["ukrainian"],
-				ur: ["urdu"],
-				vi: ["vietnamese"],
-				yo: ["yoruba"],
-				zh: ["big 5 code", "chinese bg code"],
-			};
-		return !!n[e] && n[e];
-	}
-	(window.TRACKER = {
-		seek: 0,
-		quality: 0,
-		fullscreen: 0,
-		unfullscreen: 0,
-	}),
-		(p.prototype.u = function (e) {
-			this.B = e;
-		}),
-		(p.prototype.A = function (e) {
-			(this.o = {
-				G: e,
-				H: !0,
-			}),
-				(this.j = this.F || this.C);
-		}),
-		(p.prototype.return = function (e) {
-			(this.o = {
-				return: e,
-			}),
-				(this.j = this.C);
-		}),
-		(z.prototype.u = function (e) {
-			return t(this.g), this.g.l ? A(this, this.g.l.next, e, this.g.u) : (this.g.u(e), B(this));
-		}),
-		(z.prototype.A = function (e) {
-			return t(this.g), this.g.l ? A(this, this.g.l.throw, e, this.g.u) : (this.g.A(e), B(this));
-		}),
-		(PLAYER.prototype.load = function (e) {
-			var n,
-				t,
-				i,
-				r,
-				o,
-				a,
-				s,
-				u,
-				l,
-				c,
-				d,
-				f,
-				h,
-				p,
-				g,
-				w,
-				m = this;
-			return E(
-				new D(
-					new z(function (y) {
-						if (1 == y.j) {
-							if (e && "object" != typeof e)
-								try {
-									e = JSON.parse(e);
-								} catch (n) {
-									e = null;
+	},
+	la: function () {
+		return new Promise(function (t) {
+			var e, n, r, i;
+			return N(
+				new M(
+					new I(function (o) {
+						switch (o.i) {
+							case 1:
+								return O.U() && (O.dataType = "&dataType=m3u8"), H(o, O.W(), 2);
+							case 2:
+								if (null !== (n = (e = o.A) ? Object.keys(e) : null)) {
+									if (e.isRedirect && O.o && "vip" == O.j && "slug" == O.type) return o.return((location.href = O.protocol + "//playhydrax.com/?v=" + O.value));
+									if (!n.length || e.msg) return e.msg ? o.return(t($("#" + O.c).html(e.msg))) : o.return(t($("#" + O.c).html("The video doesn't exist")));
 								}
-							if (!e || !e.status) return y.return(m.notify(e ? e.msg : "Error connecting to server. Please try again."));
-							var b = document.createElement("img");
-							if (
-								((b.src = "https://tracker.idocdn.com:3016/1x1.jpg?id=" + e.user_id + "&v=" + m.i),
-								(b.style.display = "none"),
-								document.body.appendChild(b),
-								(b.onerror = (e) => b.remove()),
-								(b.onload = () => b.remove())) /*,e.use_down*/
-							)
-								var k = setInterval(function () {
-									if ("undefined" != typeof jwplayer && jwplayer && void 0 !== jwplayer().getPlaylist) {
-										if (document.querySelector('.jw-icon-inline[button="Abyss"]')) return clearInterval(k);
-										jwplayer().addButton(
-											"https://iamcdn.net/players/logo/" + (Math.floor(19 * Math.random()) + 1) + ".png",
-											window.iconTitle || "Free Video Hosting",
-											function () {
-												window.open(window.iconHref || "//abyss.to", "_blank");
-											},
-											"Abyss"
-										);
-										var e = setInterval(function () {
-											try {
-												var n = document.querySelector('.jw-icon-inline[button="Abyss"]');
-												if (n) {
-													clearInterval(k), clearTimeout(e), n.parentNode.insertBefore(n.nextElementSibling, n);
-													var t = document.querySelector('.jw-icon-inline[button="Abyss"] .jw-button-image');
-													t && (t.style["max-height"] = "100%");
-												}
-											} catch (n) {
-												clearTimeout(e);
-											}
-										}, 100);
-									}
-								}, 100);
-							if ((e.preview && O(m, m.i), e.subtitles && !L("prioritize")))
-								for (n = !m.h.tracks.length, t = P(), i = e.md5_id, r = !1, o = 0; o < e.subtitles.length; o++)
-									(a = e.subtitles[o]),
-										(s = !1),
-										n && t && !r && t.includes(a.lang.toLocaleLowerCase()) && (s = r = !0),
-										m.h.tracks.push({
-											file: m.protocol + "//" + m.D + "/" + i + "/" + a.slug + "." + a.type,
-											label: a.lang,
-											default: s,
-										});
-							var j = ("ontouchstart" in window || "onmsgesturechange" in window) && navigator.userAgent.match(/UCBrowser/i);
-							return (
-								(m.m = e.domain + ":443"),
-								(m.v = (e.id ? e.id : Q(m.i)) + "." + e.domain + ":443"),
-								window.MediaSource && !j ? y.return(R(m, e)) : ((u = e.sources) && u.length ? ((y.j = 2), (y = void 0)) : (y = v(y, N(m, m.protocol + "//" + m.m, "POST", "slug=" + m.i))), y)
-							);
+								if (((O.g.image = O.g.image || e.thumbnail || ""), !O.U())) return (i = O.g), e.ping && (_url_ping = e.ping), H(o, O.qa(e, n), 7);
+								if (!O.ya) {
+									(O.g.file = e.link), (O.g.type = "hls"), (o.i = 4);
+									break;
+								}
+								return (r = O.g), H(o, O.pa(e.link), 6);
+							case 6:
+								(r.sources = o.A), (o.i = 4);
+								break;
+							case 7:
+								i.sources = o.A;
+							case 4:
+								return o.return(t(O.G()));
 						}
-						if (2 != y.j) {
-							if (!(l = y.B) || !l.status || void 0 === l.sources)
-								return l ? m.notify("We're processing this video. Please check back later") : m.notify("Error loading media: Unknown network error"), y.return();
-							u = l.sources;
-						}
-						var C = window.SoTrymConfigDefault;
-						if (C) {
-							var A = Object.keys(C);
-							A.splice(A.indexOf("pieceLength"), 1), A.splice(A.indexOf("fullHd"), 1), (u = u.length > A.length ? u : A);
-						}
-						for (c = 0; c < u.length; c++)
-							(f = d = null),
-								(h = "#current-browser-timestamp=" + +new Date()),
-								"sd" == u[c]
-									? ((f = "360p"), (d = m.protocol + "//" + (S() ? m.v : m.m + h)))
-									: "hd" == u[c]
-									? ((f = "720p"), (d = m.protocol + "//www" + (S() ? m.v : "." + m.m + h)))
-									: "fullHd" == u[c] && ((f = "1080p"), (d = m.protocol + "//whw" + (S() ? m.v : "." + m.m + h))),
-								m.h.sources.push({
-									file: d,
-									label: f,
-									default: "360p" == f,
-									type: "mp4",
-								});
-						e.preview &&
-							"undefined" != typeof SoTrym &&
-							SoTrym &&
-							((p = SoTrym("player")), (g = p.vtt.create("https://preview.iamcdn.net/" + m.i + ".webp"))) &&
-							((w = {
-								file: g,
-								kind: "thumbnails",
-							}),
-							m.h.tracks ? m.h.tracks.push(w) : (m.h.tracks = [w])),
-							T(m, String(e.md5_id % 16).padStart(2, "0") || 0, e.user_id),
-							U(m),
-							(y.j = 0);
 					})
 				)
 			);
-		}),
-		(PLAYER.prototype.notify = function (e) {
-			return (document.getElementById("player").innerText = e);
 		});
-}
-!(function (t, n) {
-	"object" == typeof exports && "object" == typeof module
-		? (module.exports = n())
-		: "function" == typeof define && define.amd
-		? define([], n)
-		: "object" == typeof exports
-		? (exports.devtoolsDetector = n())
-		: (t.devtoolsDetector = n());
-})("undefined" != typeof self ? self : this, function () {
-	return (function (t) {
-		var n = {};
-		function e(r) {
-			if (n[r]) return n[r].exports;
-			var i = (n[r] = {
-				i: r,
-				l: !1,
-				exports: {},
-			});
-			return t[r].call(i.exports, i, i.exports, e), (i.l = !0), i.exports;
-		}
-		return (
-			(e.m = t),
-			(e.c = n),
-			(e.d = function (t, n, r) {
-				e.o(t, n) ||
-					Object.defineProperty(t, n, {
-						configurable: !1,
-						enumerable: !0,
-						get: r,
-					});
-			}),
-			(e.n = function (t) {
-				var n =
-					t && t.__esModule
-						? function () {
-								return t.default;
-						  }
-						: function () {
-								return t;
-						  };
-				return e.d(n, "a", n), n;
-			}),
-			(e.o = function (t, n) {
-				return Object.prototype.hasOwnProperty.call(t, n);
-			}),
-			(e.p = ""),
-			e((e.s = 6))
-		);
-	})([
-		function (t, n, e) {
-			"use strict";
-			(function (t) {
-				(n.b = function (t) {
-					void 0 === t && (t = {});
-					for (var n = t.includes, e = void 0 === n ? [] : n, r = t.excludes, i = void 0 === r ? [] : r, o = !1, u = !1, c = 0, a = e; c < a.length; c++) {
-						var f = a[c];
-						if (!0 === f) {
-							o = !0;
-							break;
-						}
-					}
-					for (var s = 0, l = i; s < l.length; s++) {
-						var f = l[s];
-						if (!0 === f) {
-							u = !0;
-							break;
-						}
-					}
-					return o && !u;
-				}),
-					(n.c = function (t, n, e) {
-						var o = i.a[t];
-						if (void 0 === o) return !1;
-						return Object(r.compare)(o, n, e);
-					}),
-					(n.a = function () {
-						if ("undefined" != typeof self) return self;
-						if ("undefined" != typeof window) return window;
-						if (void 0 !== t) return t;
-						return this;
-					});
-				var r = e(11),
-					i = (e.n(r), e(4));
-			}.call(n, e(10)));
-		},
-		function (t, n, e) {
-			"use strict";
-			e.d(n, "c", function () {
-				return f;
-			}),
-				e.d(n, "d", function () {
-					return s;
-				}),
-				e.d(n, "b", function () {
-					return l;
-				}),
-				e.d(n, "f", function () {
-					return d;
-				}),
-				e.d(n, "a", function () {
-					return h;
-				}),
-				e.d(n, "e", function () {
-					return p;
-				});
-			var r,
-				i,
-				o,
-				u = e(3),
-				c = e(0),
-				a = Object(c.a)(),
-				f = "InstallTrigger" in ((null === a || void 0 === a ? void 0 : a.window) || {}) || /firefox/i.test(u.b),
-				s = /trident/i.test(u.b) || /msie/i.test(u.b),
-				l = /edge/i.test(u.b),
-				d = /webkit/i.test(u.b) && !l,
-				h = void 0 !== (null === (r = null === a || void 0 === a ? void 0 : a.window) || void 0 === r ? void 0 : r.chrome) || /chrome/i.test(u.b),
-				p =
-					"[object SafariRemoteNotification]" ===
-						((null === (o = null === (i = null === a || void 0 === a ? void 0 : a.window) || void 0 === i ? void 0 : i.safari) || void 0 === o ? void 0 : o.pushNotification) || !1).toString() ||
-					(/safari/i.test(u.b) && !h);
-		},
-		function (t, n, e) {
-			"use strict";
-			e.d(n, "b", function () {
-				return o;
-			}),
-				e.d(n, "c", function () {
-					return u;
-				}),
-				e.d(n, "a", function () {
-					return c;
-				});
-			var r = e(1);
-			function i(t) {
-				if (console) {
-					if (!r.d && !r.b) return console[t];
-					if ("log" === t || "clear" === t)
-						return function () {
-							for (var n = [], e = 0; e < arguments.length; e++) n[e] = arguments[e];
-							console[t].apply(console, n);
-						};
-				}
-				return function () {
-					for (var t = [], n = 0; n < arguments.length; n++) t[n] = arguments[n];
-				};
-			}
-			var o = i("log"),
-				u = i("table"),
-				c = i("clear");
-		},
-		function (t, n, e) {
-			"use strict";
-			(n.a = function () {
-				for (var t, n = [], e = 0; e < arguments.length; e++) n[e] = arguments[e];
-				if (null === o || void 0 === o ? void 0 : o.document) return (t = o.document).createElement.apply(t, n);
-				return {};
-			}),
-				e.d(n, "b", function () {
-					return u;
-				});
-			var r,
-				i = e(0),
-				o = Object(i.a)();
-			var u = (null === (r = null === o || void 0 === o ? void 0 : o.navigator) || void 0 === r ? void 0 : r.userAgent) || "xxxxx";
-		},
-		function (t, n, e) {
-			"use strict";
-			e.d(n, "a", function () {
-				return r;
-			});
-			for (var r = {}, i = 0, o = (e(3).b || "").match(/\w+\/(\d|\.)+(\s|$)/gi) || []; i < o.length; i++) {
-				var u = o[i].split("/"),
-					c = u[0],
-					a = u[1];
-				r[c] = a;
-			}
-		},
-		function (t, n, e) {
-			"use strict";
-			e.d(n, "b", function () {
-				return i;
-			}),
-				e.d(n, "d", function () {
-					return o;
-				}),
-				e.d(n, "c", function () {
-					return u;
-				}),
-				e.d(n, "a", function () {
-					return c;
-				}),
-				e.d(n, "e", function () {
-					return a;
-				});
-			var r = e(3),
-				i = /ipad/i.test(r.b),
-				o = /macintosh/i.test(r.b),
-				u = /iphone/i.test(r.b),
-				c = /android/i.test(r.b),
-				a = /windows/i.test(r.b);
-		},
-		function (t, n, e) {
-			"use strict";
-			Object.defineProperty(n, "__esModule", {
-				value: !0,
-			}),
-				(n.addListener = function (t) {
-					l.addListener(t);
-				}),
-				(n.removeListener = function (t) {
-					l.removeListener(t);
-				}),
-				(n.isLaunch = function () {
-					return l.isLaunch();
-				}),
-				(n.launch = function () {
-					l.launch();
-				}),
-				(n.stop = function () {
-					l.stop();
-				}),
-				(n.setDetectDelay = function (t) {
-					l.setDetectDelay(t);
-				});
-			var r = e(7),
-				i = e(8);
-			e.d(n, "DevtoolsDetector", function () {
-				return r.a;
-			}),
-				e.d(n, "checkers", function () {
-					return i;
-				});
-			var o = e(0);
-			e.d(n, "match", function () {
-				return o.b;
-			}),
-				e.d(n, "specificVersionMatch", function () {
-					return o.c;
-				});
-			var u = e(1);
-			e.d(n, "isFirefox", function () {
-				return u.c;
-			}),
-				e.d(n, "isIE", function () {
-					return u.d;
-				}),
-				e.d(n, "isEdge", function () {
-					return u.b;
-				}),
-				e.d(n, "isWebkit", function () {
-					return u.f;
-				}),
-				e.d(n, "isChrome", function () {
-					return u.a;
-				}),
-				e.d(n, "isSafari", function () {
-					return u.e;
-				});
-			var c = e(2);
-			e.d(n, "log", function () {
-				return c.b;
-			}),
-				e.d(n, "table", function () {
-					return c.c;
-				}),
-				e.d(n, "clear", function () {
-					return c.a;
-				});
-			var a = e(17);
-			e.d(n, "isMobile", function () {
-				return a.a;
-			});
-			var f = e(4);
-			e.d(n, "versionMap", function () {
-				return f.a;
-			});
-			var s = e(5);
-			e.d(n, "isIpad", function () {
-				return s.b;
-			}),
-				e.d(n, "isMac", function () {
-					return s.d;
-				}),
-				e.d(n, "isIphone", function () {
-					return s.c;
-				}),
-				e.d(n, "isAndroid", function () {
-					return s.a;
-				}),
-				e.d(n, "isWindows", function () {
-					return s.e;
-				});
-			var l = new r.a({
-				checkers: [i.elementIdChecker, i.regToStringChecker, i.functionToStringChecker, i.depRegToStringChecker, i.dateToStringChecker, i.debuggerChecker],
-			});
-			n.default = l;
-		},
-		function (t, n, e) {
-			"use strict";
-			e.d(n, "a", function () {
-				return o;
-			});
-			var r =
-					(this && this.__awaiter) ||
-					function (t, n, e, r) {
-						return new (e || (e = Promise))(function (i, o) {
-							function u(t) {
-								try {
-									a(r.next(t));
-								} catch (t) {
-									o(t);
-								}
-							}
-							function c(t) {
-								try {
-									a(r.throw(t));
-								} catch (t) {
-									o(t);
-								}
-							}
-							function a(t) {
-								t.done
-									? i(t.value)
-									: (function (t) {
-											return t instanceof e
-												? t
-												: new e(function (n) {
-														n(t);
-												  });
-									  })(t.value).then(u, c);
-							}
-							a((r = r.apply(t, n || [])).next());
-						});
-					},
-				i =
-					(this && this.__generator) ||
-					function (t, n) {
-						var e,
-							r,
-							i,
-							o,
-							u = {
-								label: 0,
-								sent: function () {
-									if (1 & i[0]) throw i[1];
-									return i[1];
-								},
-								trys: [],
-								ops: [],
-							};
-						return (
-							(o = {
-								next: c(0),
-								throw: c(1),
-								return: c(2),
-							}),
-							"function" == typeof Symbol &&
-								(o[Symbol.iterator] = function () {
-									return this;
-								}),
-							o
-						);
-						function c(o) {
-							return function (c) {
-								return (function (o) {
-									if (e) throw new TypeError("Generator is already executing.");
-									for (; u; )
-										try {
-											if (((e = 1), r && (i = 2 & o[0] ? r.return : o[0] ? r.throw || ((i = r.return) && i.call(r), 0) : r.next) && !(i = i.call(r, o[1])).done)) return i;
-											switch (((r = 0), i && (o = [2 & o[0], i.value]), o[0])) {
-												case 0:
-												case 1:
-													i = o;
-													break;
-												case 4:
-													return (
-														u.label++,
-														{
-															value: o[1],
-															done: !1,
-														}
-													);
-												case 5:
-													u.label++, (r = o[1]), (o = [0]);
-													continue;
-												case 7:
-													(o = u.ops.pop()), u.trys.pop();
-													continue;
-												default:
-													if (!(i = (i = u.trys).length > 0 && i[i.length - 1]) && (6 === o[0] || 2 === o[0])) {
-														u = 0;
-														continue;
-													}
-													if (3 === o[0] && (!i || (o[1] > i[0] && o[1] < i[3]))) {
-														u.label = o[1];
-														break;
-													}
-													if (6 === o[0] && u.label < i[1]) {
-														(u.label = i[1]), (i = o);
-														break;
-													}
-													if (i && u.label < i[2]) {
-														(u.label = i[2]), u.ops.push(o);
-														break;
-													}
-													i[2] && u.ops.pop(), u.trys.pop();
-													continue;
-											}
-											o = n.call(t, u);
-										} catch (t) {
-											(o = [6, t]), (r = 0);
-										} finally {
-											e = i = 0;
-										}
-									if (5 & o[0]) throw o[1];
-									return {
-										value: o[0] ? o[1] : void 0,
-										done: !0,
-									};
-								})([o, c]);
-							};
-						}
-					},
-				o = (function () {
-					function t(t) {
-						var n = t.checkers;
-						(this._listeners = []), (this._isOpen = !1), (this._detectLoopStopped = !0), (this._detectLoopDelay = 500), (this._checkers = n.slice());
-					}
+	},
+	G: function () {
+		var t;
+		return N(
+			new M(
+				new I(function (e) {
 					return (
-						(t.prototype.launch = function () {
-							this._detectLoopDelay <= 0 && this.setDetectDelay(500), this._detectLoopStopped && ((this._detectLoopStopped = !1), this._detectLoop());
-						}),
-						(t.prototype.stop = function () {
-							this._detectLoopStopped || ((this._detectLoopStopped = !0), clearTimeout(this._timer));
-						}),
-						(t.prototype.isLaunch = function () {
-							return !this._detectLoopStopped;
-						}),
-						(t.prototype.setDetectDelay = function (t) {
-							this._detectLoopDelay = t;
-						}),
-						(t.prototype.addListener = function (t) {
-							this._listeners.push(t);
-						}),
-						(t.prototype.removeListener = function (t) {
-							this._listeners = this._listeners.filter(function (n) {
-								return n !== t;
-							});
-						}),
-						(t.prototype._broadcast = function (t) {
-							for (var n = 0, e = this._listeners; n < e.length; n++) {
-								var r = e[n];
-								try {
-									r(t.isOpen, t);
-								} catch (t) {}
-							}
-						}),
-						(t.prototype._detectLoop = function () {
-							return r(this, void 0, void 0, function () {
-								var t,
-									n,
-									e,
-									r,
-									o,
-									u = this;
-								return i(this, function (i) {
-									switch (i.label) {
-										case 0:
-											(t = !1), (n = ""), (e = 0), (r = this._checkers), (i.label = 1);
-										case 1:
-											return e < r.length ? [4, (o = r[e]).isEnable()] : [3, 6];
-										case 2:
-											return i.sent() ? ((n = o.name), [4, o.isOpen()]) : [3, 4];
-										case 3:
-											(t = i.sent()), (i.label = 4);
-										case 4:
-											if (t) return [3, 6];
-											i.label = 5;
-										case 5:
-											return e++, [3, 1];
-										case 6:
-											return (
-												t != this._isOpen &&
-													((this._isOpen = t),
-													this._broadcast({
-														isOpen: t,
-														checkerName: n,
-													})),
-												this._detectLoopDelay > 0
-													? (this._timer = setTimeout(function () {
-															return u._detectLoop();
-													  }, this._detectLoopDelay))
-													: this.stop(),
-												[2]
-											);
-									}
-								});
-							});
-						}),
-						t
+						(t = O),
+						$.cachedScript(t.ra)
+							.done(function () {
+								var e = setInterval(function () {
+									"undefined" != typeof jwplayer && jwplayer && (clearInterval(e), jwplayer(t.c).setup(t.g));
+								}, 500);
+							})
+							.fail(function () {
+								t.retry++, 10 > t.retry ? setTimeout(t.G(), 500) : $("#" + t.c).html("Jwplayer is not defined");
+							}),
+						e.return()
 					);
-				})();
-		},
-		function (t, n, e) {
-			"use strict";
-			Object.defineProperty(n, "__esModule", {
-				value: !0,
-			});
-			var r = e(9);
-			e.d(n, "depRegToStringChecker", function () {
-				return r.a;
-			});
-			var i = e(12);
-			e.d(n, "elementIdChecker", function () {
-				return i.a;
-			});
-			var o = e(13);
-			e.d(n, "functionToStringChecker", function () {
-				return o.a;
-			});
-			var u = e(14);
-			e.d(n, "regToStringChecker", function () {
-				return u.a;
-			});
-			var c = e(15);
-			e.d(n, "debuggerChecker", function () {
-				return c.a;
-			});
-			var a = e(16);
-			e.d(n, "dateToStringChecker", function () {
-				return a.a;
-			});
-		},
-		function (t, n, e) {
-			"use strict";
-			e.d(n, "a", function () {
-				return s;
-			});
-			var r = e(1),
-				i = e(2),
-				o = e(0),
-				u =
-					(this && this.__awaiter) ||
-					function (t, n, e, r) {
-						return new (e || (e = Promise))(function (i, o) {
-							function u(t) {
-								try {
-									a(r.next(t));
-								} catch (t) {
-									o(t);
-								}
-							}
-							function c(t) {
-								try {
-									a(r.throw(t));
-								} catch (t) {
-									o(t);
-								}
-							}
-							function a(t) {
-								t.done
-									? i(t.value)
-									: (function (t) {
-											return t instanceof e
-												? t
-												: new e(function (n) {
-														n(t);
-												  });
-									  })(t.value).then(u, c);
-							}
-							a((r = r.apply(t, n || [])).next());
-						});
-					},
-				c =
-					(this && this.__generator) ||
-					function (t, n) {
-						var e,
-							r,
-							i,
-							o,
-							u = {
-								label: 0,
-								sent: function () {
-									if (1 & i[0]) throw i[1];
-									return i[1];
-								},
-								trys: [],
-								ops: [],
-							};
-						return (
-							(o = {
-								next: c(0),
-								throw: c(1),
-								return: c(2),
-							}),
-							"function" == typeof Symbol &&
-								(o[Symbol.iterator] = function () {
-									return this;
-								}),
-							o
-						);
-						function c(o) {
-							return function (c) {
-								return (function (o) {
-									if (e) throw new TypeError("Generator is already executing.");
-									for (; u; )
-										try {
-											if (((e = 1), r && (i = 2 & o[0] ? r.return : o[0] ? r.throw || ((i = r.return) && i.call(r), 0) : r.next) && !(i = i.call(r, o[1])).done)) return i;
-											switch (((r = 0), i && (o = [2 & o[0], i.value]), o[0])) {
-												case 0:
-												case 1:
-													i = o;
-													break;
-												case 4:
-													return (
-														u.label++,
-														{
-															value: o[1],
-															done: !1,
-														}
-													);
-												case 5:
-													u.label++, (r = o[1]), (o = [0]);
-													continue;
-												case 7:
-													(o = u.ops.pop()), u.trys.pop();
-													continue;
-												default:
-													if (!(i = (i = u.trys).length > 0 && i[i.length - 1]) && (6 === o[0] || 2 === o[0])) {
-														u = 0;
-														continue;
-													}
-													if (3 === o[0] && (!i || (o[1] > i[0] && o[1] < i[3]))) {
-														u.label = o[1];
-														break;
-													}
-													if (6 === o[0] && u.label < i[1]) {
-														(u.label = i[1]), (i = o);
-														break;
-													}
-													if (i && u.label < i[2]) {
-														(u.label = i[2]), u.ops.push(o);
-														break;
-													}
-													i[2] && u.ops.pop(), u.trys.pop();
-													continue;
-											}
-											o = n.call(t, u);
-										} catch (t) {
-											(o = [6, t]), (r = 0);
-										} finally {
-											e = i = 0;
-										}
-									if (5 & o[0]) throw o[1];
-									return {
-										value: o[0] ? o[1] : void 0,
-										done: !0,
-									};
-								})([o, c]);
-							};
-						}
-					},
-				a = / /,
-				f = !1;
-			a.toString = function () {
-				return (f = !0), s.name;
-			};
-			var s = {
-				name: "dep-reg-to-string",
-				isOpen: function () {
-					return u(this, void 0, void 0, function () {
-						return c(this, function (t) {
-							return (
-								(f = !1),
-								Object(i.c)({
-									dep: a,
-								}),
-								Object(i.a)(),
-								[2, f]
-							);
-						});
-					});
-				},
-				isEnable: function () {
-					return u(this, void 0, void 0, function () {
-						return c(this, function (t) {
-							return [
-								2,
-								Object(o.b)({
-									includes: [!0],
-									excludes: [r.c, r.d],
-								}),
-							];
-						});
-					});
-				},
-			};
-		},
-		function (t, n) {
-			var e;
-			e = (function () {
-				return this;
-			})();
-			try {
-				e = e || Function("return this")() || (0, eval)("this");
-			} catch (t) {
-				"object" == typeof window && (e = window);
-			}
-			t.exports = e;
-		},
-		function (t, n, e) {
-			var r, i, o;
-			!(function (e, u) {
-				(i = []), void 0 === (o = "function" == typeof (r = u) ? r.apply(n, i) : r) || (t.exports = o);
-			})(0, function () {
-				var t = /^v?(?:\d+)(\.(?:[x*]|\d+)(\.(?:[x*]|\d+)(\.(?:[x*]|\d+))?(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?)?)?$/i;
-				function n(t) {
-					var n = t.replace(/^v/, "").replace(/\+.*$/, ""),
-						e = (function (t, n) {
-							return -1 === t.indexOf(n) ? t.length : t.indexOf(n);
-						})(n, "-"),
-						r = n.substring(0, e).split(".");
-					return r.push(n.substring(e + 1)), r;
-				}
-				function e(t) {
-					return isNaN(Number(t)) ? t : Number(t);
-				}
-				function r(n) {
-					if ("string" != typeof n) throw new TypeError("Invalid argument expected string");
-					if (!t.test(n)) throw new Error("Invalid argument not valid semver ('" + n + "' received)");
-				}
-				function i(t, i) {
-					[t, i].forEach(r);
-					for (var o = n(t), u = n(i), c = 0; c < Math.max(o.length - 1, u.length - 1); c++) {
-						var a = parseInt(o[c] || 0, 10),
-							f = parseInt(u[c] || 0, 10);
-						if (a > f) return 1;
-						if (f > a) return -1;
-					}
-					var s = o[o.length - 1],
-						l = u[u.length - 1];
-					if (s && l) {
-						var d = s.split(".").map(e),
-							h = l.split(".").map(e);
-						for (c = 0; c < Math.max(d.length, h.length); c++) {
-							if (void 0 === d[c] || ("string" == typeof h[c] && "number" == typeof d[c])) return -1;
-							if (void 0 === h[c] || ("string" == typeof d[c] && "number" == typeof h[c])) return 1;
-							if (d[c] > h[c]) return 1;
-							if (h[c] > d[c]) return -1;
-						}
-					} else if (s || l) return s ? -1 : 1;
-					return 0;
-				}
-				var o = [">", ">=", "=", "<", "<="],
-					u = {
-						">": [1],
-						">=": [0, 1],
-						"=": [0],
-						"<=": [-1, 0],
-						"<": [-1],
-					};
-				return (
-					(i.validate = function (n) {
-						return "string" == typeof n && t.test(n);
-					}),
-					(i.compare = function (t, n, e) {
-						!(function (t) {
-							if ("string" != typeof t) throw new TypeError("Invalid operator type, expected string but got " + typeof t);
-							if (-1 === o.indexOf(t)) throw new TypeError("Invalid operator, expected one of " + o.join("|"));
-						})(e);
-						var r = i(t, n);
-						return u[e].indexOf(r) > -1;
-					}),
-					i
+				})
+			)
+		);
+	},
+	za: function () {
+		if (((O.J = !0), void 0 === O.$)) {
+			O.$ = !0;
+			var t = localStorage.getItem(window.location.href);
+			if (0 < t) {
+				O.resize(), jwplayer().pause();
+				var e = $("#" + jwplayer().id)[0];
+				$("#" + jwplayer().id).append(
+					"\n        <div id='overlay'></div>\n        <div id='hydrax-watching-messbox'>\n          <div id='hydrax-watching-messbox-header'>Notification</div>\n          <div id='hydrax-watching-messbox-body'>\n            You has been watched this video <strong>" +
+						t +
+						" seconds</strong>.<br>\n            <strong>Do you want to continue?</strong>\n          </div>\n          <div id='hydrax-watching-messbox-footer'>\n            <button id='hydrax-watching-messbox-ok'>Yes</button>\n            <button id='hydrax-watching-messbox-close'>Close</button>\n          </div>\n        </div>\n      "
 				);
-			});
-		},
-		function (t, n, e) {
-			"use strict";
-			e.d(n, "a", function () {
-				return l;
-			});
-			var r = e(1),
-				i = e(2),
-				o = e(0),
-				u = e(3),
-				c =
-					(this && this.__awaiter) ||
-					function (t, n, e, r) {
-						return new (e || (e = Promise))(function (i, o) {
-							function u(t) {
-								try {
-									a(r.next(t));
-								} catch (t) {
-									o(t);
-								}
-							}
-							function c(t) {
-								try {
-									a(r.throw(t));
-								} catch (t) {
-									o(t);
-								}
-							}
-							function a(t) {
-								t.done
-									? i(t.value)
-									: (function (t) {
-											return t instanceof e
-												? t
-												: new e(function (n) {
-														n(t);
-												  });
-									  })(t.value).then(u, c);
-							}
-							a((r = r.apply(t, n || [])).next());
-						});
-					},
-				a =
-					(this && this.__generator) ||
-					function (t, n) {
-						var e,
-							r,
-							i,
-							o,
-							u = {
-								label: 0,
-								sent: function () {
-									if (1 & i[0]) throw i[1];
-									return i[1];
-								},
-								trys: [],
-								ops: [],
-							};
-						return (
-							(o = {
-								next: c(0),
-								throw: c(1),
-								return: c(2),
-							}),
-							"function" == typeof Symbol &&
-								(o[Symbol.iterator] = function () {
-									return this;
-								}),
-							o
-						);
-						function c(o) {
-							return function (c) {
-								return (function (o) {
-									if (e) throw new TypeError("Generator is already executing.");
-									for (; u; )
-										try {
-											if (((e = 1), r && (i = 2 & o[0] ? r.return : o[0] ? r.throw || ((i = r.return) && i.call(r), 0) : r.next) && !(i = i.call(r, o[1])).done)) return i;
-											switch (((r = 0), i && (o = [2 & o[0], i.value]), o[0])) {
-												case 0:
-												case 1:
-													i = o;
-													break;
-												case 4:
-													return (
-														u.label++,
-														{
-															value: o[1],
-															done: !1,
-														}
-													);
-												case 5:
-													u.label++, (r = o[1]), (o = [0]);
-													continue;
-												case 7:
-													(o = u.ops.pop()), u.trys.pop();
-													continue;
-												default:
-													if (!(i = (i = u.trys).length > 0 && i[i.length - 1]) && (6 === o[0] || 2 === o[0])) {
-														u = 0;
-														continue;
-													}
-													if (3 === o[0] && (!i || (o[1] > i[0] && o[1] < i[3]))) {
-														u.label = o[1];
-														break;
-													}
-													if (6 === o[0] && u.label < i[1]) {
-														(u.label = i[1]), (i = o);
-														break;
-													}
-													if (i && u.label < i[2]) {
-														(u.label = i[2]), u.ops.push(o);
-														break;
-													}
-													i[2] && u.ops.pop(), u.trys.pop();
-													continue;
-											}
-											o = n.call(t, u);
-										} catch (t) {
-											(o = [6, t]), (r = 0);
-										} finally {
-											e = i = 0;
-										}
-									if (5 & o[0]) throw o[1];
-									return {
-										value: o[0] ? o[1] : void 0,
-										done: !0,
-									};
-								})([o, c]);
-							};
-						}
-					},
-				f = Object(u.a)("div"),
-				s = !1;
-			Object.defineProperty(f, "id", {
-				get: function () {
-					return (s = !0), l.name;
-				},
-				configurable: !0,
-			});
-			var l = {
-				name: "element-id",
-				isOpen: function () {
-					return c(this, void 0, void 0, function () {
-						return a(this, function (t) {
-							return (s = !1), Object(i.b)(f), Object(i.a)(), [2, s];
-						});
+				var n = $("#hydrax-watching-messbox")[0];
+				$("#hydrax-watching-messbox").css({ left: (e.offsetWidth - n.offsetWidth) / 2 + "px", top: (e.offsetHeight - n.offsetHeight) / 2 + "px" }),
+					$("#hydrax-watching-messbox-ok").mouseup(function () {
+						$("#hydrax-watching-messbox, #overlay").remove(), jwplayer().seek(t), jwplayer().play();
+					}),
+					$("#hydrax-watching-messbox-close").mouseup(function () {
+						jwplayer().play(), $("#hydrax-watching-messbox, #overlay").remove();
 					});
-				},
-				isEnable: function () {
-					return c(this, void 0, void 0, function () {
-						return a(this, function (t) {
-							return [
-								2,
-								Object(o.b)({
-									includes: [!0],
-									excludes: [r.d, r.b, r.c],
-								}),
-							];
-						});
-					});
-				},
-			};
-		},
-		function (t, n, e) {
-			"use strict";
-			e.d(n, "a", function () {
-				return l;
-			});
-			var r = e(1),
-				i = e(2),
-				o = e(5),
-				u = e(0),
-				c =
-					(this && this.__awaiter) ||
-					function (t, n, e, r) {
-						return new (e || (e = Promise))(function (i, o) {
-							function u(t) {
-								try {
-									a(r.next(t));
-								} catch (t) {
-									o(t);
-								}
-							}
-							function c(t) {
-								try {
-									a(r.throw(t));
-								} catch (t) {
-									o(t);
-								}
-							}
-							function a(t) {
-								t.done
-									? i(t.value)
-									: (function (t) {
-											return t instanceof e
-												? t
-												: new e(function (n) {
-														n(t);
-												  });
-									  })(t.value).then(u, c);
-							}
-							a((r = r.apply(t, n || [])).next());
-						});
-					},
-				a =
-					(this && this.__generator) ||
-					function (t, n) {
-						var e,
-							r,
-							i,
-							o,
-							u = {
-								label: 0,
-								sent: function () {
-									if (1 & i[0]) throw i[1];
-									return i[1];
-								},
-								trys: [],
-								ops: [],
-							};
-						return (
-							(o = {
-								next: c(0),
-								throw: c(1),
-								return: c(2),
-							}),
-							"function" == typeof Symbol &&
-								(o[Symbol.iterator] = function () {
-									return this;
-								}),
-							o
-						);
-						function c(o) {
-							return function (c) {
-								return (function (o) {
-									if (e) throw new TypeError("Generator is already executing.");
-									for (; u; )
-										try {
-											if (((e = 1), r && (i = 2 & o[0] ? r.return : o[0] ? r.throw || ((i = r.return) && i.call(r), 0) : r.next) && !(i = i.call(r, o[1])).done)) return i;
-											switch (((r = 0), i && (o = [2 & o[0], i.value]), o[0])) {
-												case 0:
-												case 1:
-													i = o;
-													break;
-												case 4:
-													return (
-														u.label++,
-														{
-															value: o[1],
-															done: !1,
-														}
-													);
-												case 5:
-													u.label++, (r = o[1]), (o = [0]);
-													continue;
-												case 7:
-													(o = u.ops.pop()), u.trys.pop();
-													continue;
-												default:
-													if (!(i = (i = u.trys).length > 0 && i[i.length - 1]) && (6 === o[0] || 2 === o[0])) {
-														u = 0;
-														continue;
-													}
-													if (3 === o[0] && (!i || (o[1] > i[0] && o[1] < i[3]))) {
-														u.label = o[1];
-														break;
-													}
-													if (6 === o[0] && u.label < i[1]) {
-														(u.label = i[1]), (i = o);
-														break;
-													}
-													if (i && u.label < i[2]) {
-														(u.label = i[2]), u.ops.push(o);
-														break;
-													}
-													i[2] && u.ops.pop(), u.trys.pop();
-													continue;
-											}
-											o = n.call(t, u);
-										} catch (t) {
-											(o = [6, t]), (r = 0);
-										} finally {
-											e = i = 0;
-										}
-									if (5 & o[0]) throw o[1];
-									return {
-										value: o[0] ? o[1] : void 0,
-										done: !0,
-									};
-								})([o, c]);
-							};
-						}
-					};
-			function f() {}
-			var s = 0;
-			f.toString = function () {
-				return s++, "";
-			};
-			var l = {
-				name: "function-to-string",
-				isOpen: function () {
-					return c(this, void 0, void 0, function () {
-						return a(this, function (t) {
-							return (s = 0), Object(i.b)(f), Object(i.a)(), [2, 2 === s];
-						});
-					});
-				},
-				isEnable: function () {
-					return c(this, void 0, void 0, function () {
-						return a(this, function (t) {
-							return [
-								2,
-								Object(u.b)({
-									includes: [!0],
-									excludes: [r.c, (o.b || o.c) && r.a],
-								}),
-							];
-						});
-					});
-				},
-			};
-		},
-		function (t, n, e) {
-			"use strict";
-			e.d(n, "a", function () {
-				return s;
-			});
-			var r = e(2),
-				i = e(1),
-				o = e(0),
-				u =
-					(this && this.__awaiter) ||
-					function (t, n, e, r) {
-						return new (e || (e = Promise))(function (i, o) {
-							function u(t) {
-								try {
-									a(r.next(t));
-								} catch (t) {
-									o(t);
-								}
-							}
-							function c(t) {
-								try {
-									a(r.throw(t));
-								} catch (t) {
-									o(t);
-								}
-							}
-							function a(t) {
-								t.done
-									? i(t.value)
-									: (function (t) {
-											return t instanceof e
-												? t
-												: new e(function (n) {
-														n(t);
-												  });
-									  })(t.value).then(u, c);
-							}
-							a((r = r.apply(t, n || [])).next());
-						});
-					},
-				c =
-					(this && this.__generator) ||
-					function (t, n) {
-						var e,
-							r,
-							i,
-							o,
-							u = {
-								label: 0,
-								sent: function () {
-									if (1 & i[0]) throw i[1];
-									return i[1];
-								},
-								trys: [],
-								ops: [],
-							};
-						return (
-							(o = {
-								next: c(0),
-								throw: c(1),
-								return: c(2),
-							}),
-							"function" == typeof Symbol &&
-								(o[Symbol.iterator] = function () {
-									return this;
-								}),
-							o
-						);
-						function c(o) {
-							return function (c) {
-								return (function (o) {
-									if (e) throw new TypeError("Generator is already executing.");
-									for (; u; )
-										try {
-											if (((e = 1), r && (i = 2 & o[0] ? r.return : o[0] ? r.throw || ((i = r.return) && i.call(r), 0) : r.next) && !(i = i.call(r, o[1])).done)) return i;
-											switch (((r = 0), i && (o = [2 & o[0], i.value]), o[0])) {
-												case 0:
-												case 1:
-													i = o;
-													break;
-												case 4:
-													return (
-														u.label++,
-														{
-															value: o[1],
-															done: !1,
-														}
-													);
-												case 5:
-													u.label++, (r = o[1]), (o = [0]);
-													continue;
-												case 7:
-													(o = u.ops.pop()), u.trys.pop();
-													continue;
-												default:
-													if (!(i = (i = u.trys).length > 0 && i[i.length - 1]) && (6 === o[0] || 2 === o[0])) {
-														u = 0;
-														continue;
-													}
-													if (3 === o[0] && (!i || (o[1] > i[0] && o[1] < i[3]))) {
-														u.label = o[1];
-														break;
-													}
-													if (6 === o[0] && u.label < i[1]) {
-														(u.label = i[1]), (i = o);
-														break;
-													}
-													if (i && u.label < i[2]) {
-														(u.label = i[2]), u.ops.push(o);
-														break;
-													}
-													i[2] && u.ops.pop(), u.trys.pop();
-													continue;
-											}
-											o = n.call(t, u);
-										} catch (t) {
-											(o = [6, t]), (r = 0);
-										} finally {
-											e = i = 0;
-										}
-									if (5 & o[0]) throw o[1];
-									return {
-										value: o[0] ? o[1] : void 0,
-										done: !0,
-									};
-								})([o, c]);
-							};
-						}
-					},
-				a = / /,
-				f = !1;
-			a.toString = function () {
-				return (f = !0), s.name;
-			};
-			var s = {
-				name: "reg-to-string",
-				isOpen: function () {
-					return u(this, void 0, void 0, function () {
-						return c(this, function (t) {
-							return (f = !1), Object(r.b)(a), Object(r.a)(), [2, f];
-						});
-					});
-				},
-				isEnable: function () {
-					return u(this, void 0, void 0, function () {
-						return c(this, function (t) {
-							return [
-								2,
-								Object(o.b)({
-									includes: [!0],
-									excludes: [i.f],
-								}),
-							];
-						});
-					});
-				},
-			};
-		},
-		function (t, n, e) {
-			"use strict";
-			e.d(n, "a", function () {
-				return u;
-			});
-			var r =
-					(this && this.__awaiter) ||
-					function (t, n, e, r) {
-						return new (e || (e = Promise))(function (i, o) {
-							function u(t) {
-								try {
-									a(r.next(t));
-								} catch (t) {
-									o(t);
-								}
-							}
-							function c(t) {
-								try {
-									a(r.throw(t));
-								} catch (t) {
-									o(t);
-								}
-							}
-							function a(t) {
-								t.done
-									? i(t.value)
-									: (function (t) {
-											return t instanceof e
-												? t
-												: new e(function (n) {
-														n(t);
-												  });
-									  })(t.value).then(u, c);
-							}
-							a((r = r.apply(t, n || [])).next());
-						});
-					},
-				i =
-					(this && this.__generator) ||
-					function (t, n) {
-						var e,
-							r,
-							i,
-							o,
-							u = {
-								label: 0,
-								sent: function () {
-									if (1 & i[0]) throw i[1];
-									return i[1];
-								},
-								trys: [],
-								ops: [],
-							};
-						return (
-							(o = {
-								next: c(0),
-								throw: c(1),
-								return: c(2),
-							}),
-							"function" == typeof Symbol &&
-								(o[Symbol.iterator] = function () {
-									return this;
-								}),
-							o
-						);
-						function c(o) {
-							return function (c) {
-								return (function (o) {
-									if (e) throw new TypeError("Generator is already executing.");
-									for (; u; )
-										try {
-											if (((e = 1), r && (i = 2 & o[0] ? r.return : o[0] ? r.throw || ((i = r.return) && i.call(r), 0) : r.next) && !(i = i.call(r, o[1])).done)) return i;
-											switch (((r = 0), i && (o = [2 & o[0], i.value]), o[0])) {
-												case 0:
-												case 1:
-													i = o;
-													break;
-												case 4:
-													return (
-														u.label++,
-														{
-															value: o[1],
-															done: !1,
-														}
-													);
-												case 5:
-													u.label++, (r = o[1]), (o = [0]);
-													continue;
-												case 7:
-													(o = u.ops.pop()), u.trys.pop();
-													continue;
-												default:
-													if (!(i = (i = u.trys).length > 0 && i[i.length - 1]) && (6 === o[0] || 2 === o[0])) {
-														u = 0;
-														continue;
-													}
-													if (3 === o[0] && (!i || (o[1] > i[0] && o[1] < i[3]))) {
-														u.label = o[1];
-														break;
-													}
-													if (6 === o[0] && u.label < i[1]) {
-														(u.label = i[1]), (i = o);
-														break;
-													}
-													if (i && u.label < i[2]) {
-														(u.label = i[2]), u.ops.push(o);
-														break;
-													}
-													i[2] && u.ops.pop(), u.trys.pop();
-													continue;
-											}
-											o = n.call(t, u);
-										} catch (t) {
-											(o = [6, t]), (r = 0);
-										} finally {
-											e = i = 0;
-										}
-									if (5 & o[0]) throw o[1];
-									return {
-										value: o[0] ? o[1] : void 0,
-										done: !0,
-									};
-								})([o, c]);
-							};
-						}
-					};
-			function o() {
-				return performance ? performance.now() : Date.now();
 			}
-			var u = {
-				name: "debugger-checker",
-				isOpen: function () {
-					return r(this, void 0, void 0, function () {
-						var t;
-						return i(this, function (n) {
-							return false;
-							return (t = o()), function () {}.constructor("debugger")(), [2, o() - t > 100];
-						});
-					});
-				},
-				isEnable: function () {
-					return r(this, void 0, void 0, function () {
-						return i(this, function (t) {
-							return [2, !0];
-						});
-					});
-				},
-			};
-		},
-		function (t, n, e) {
-			"use strict";
-			e.d(n, "a", function () {
-				return s;
-			});
-			var r = e(1),
-				i = e(2),
-				o = e(0),
-				u =
-					(this && this.__awaiter) ||
-					function (t, n, e, r) {
-						return new (e || (e = Promise))(function (i, o) {
-							function u(t) {
-								try {
-									a(r.next(t));
-								} catch (t) {
-									o(t);
-								}
+		}
+	},
+	oa: function () {
+		if (void 0 !== O.b.script) {
+			O.resize();
+			var t = O.b.timeSkip;
+			$("#" + jwplayer().id).append(
+				"\n      <div id='overlay'></div>\n      <div id='hydrax-watching-adbox'>\n        <div id='hydrax-watching-adbox-body'>\n          <div id='hydrax-watching-adbox-close'>" +
+					(t || "X") +
+					"</div>\n        </div>\n      </div>\n    "
+			);
+			var e = setInterval(function () {
+				0 >= --t ? (clearInterval(e), $("#hydrax-watching-adbox-close").html("X")) : $("#hydrax-watching-adbox-close").html(t);
+			}, 1e3);
+			if (
+				($("#hydrax-watching-adbox-body").css({ width: O.b.width + "px", height: O.b.height + "px" }),
+				$("#hydrax-watching-adbox-close").mouseup(function () {
+					0 < t || ($("#hydrax-watching-adbox, #overlay").remove(), jwplayer().play());
+				}),
+				0 <= O.b.script.search("<script"))
+			) {
+				var n = document.createElement("iframe");
+				(n.width = O.b.width),
+					(n.height = O.b.height),
+					(n.scrolling = "no"),
+					(n.frameBorder = "0"),
+					document.getElementById("hydrax-watching-adbox-body").appendChild(n),
+					(n = n.contentWindow.document).open(),
+					n.write("<style>*{margin:0;padding:0;}</style>" + O.b.script),
+					n.close();
+			} else $("#hydrax-watching-adbox-body").append(O.b.script);
+			n = $("#" + jwplayer().id)[0];
+			var r = $("#hydrax-watching-adbox")[0];
+			$("#hydrax-watching-adbox").css({ left: (n.offsetWidth - r.offsetWidth) / 2 + "px", top: (n.offsetHeight - r.offsetHeight) / 2 + "px" });
+		}
+	},
+	W: function () {
+		var t = "guest" == O.j ? "slug=" + O.C + O.dataType : "key=" + O.key + "&type=" + O.type + "&value=" + O.value + O.dataType;
+		return new Promise(function (e) {
+			fetch(O.ca + "/" + O.j, { method: O.ba, headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: t, credentials: O.credentials })
+				.then(function (t) {
+					return t.json();
+				})
+				.then(function (t) {
+					return e(t);
+				})
+				.catch(function (t) {
+					if ((O.retry--, !O.retry)) return $("#" + O.c).html(t), e({});
+					setTimeout(function () {
+						return e(O.W());
+					}, 1e3);
+				});
+		});
+	},
+	qa: function (t, e) {
+		var n = new TextEncoder("utf-8");
+		return new Promise(function (r) {
+			var i = e.indexOf("servers");
+			-1 < i && e.splice(i, 1),
+				-1 < (i = e.indexOf("expired")) && e.splice(i, 1),
+				-1 < (i = e.indexOf("sig")) && e.splice(i, 1),
+				-1 < (i = e.indexOf("thumbnail")) && e.splice(i, 1),
+				-1 < (i = e.indexOf("hash")) && e.splice(i, 1),
+				-1 < (i = e.indexOf("id")) && e.splice(i, 1),
+				-1 < (i = e.indexOf("ids")) && e.splice(i, 1),
+				-1 < (i = e.indexOf("ping")) && e.splice(i, 1),
+				-1 < (i = e.indexOf("isVast")) && e.splice(i, 1),
+				-1 < (i = e.indexOf("isRedirect")) && e.splice(i, 1),
+				(i = "#EXTM3U\n#EXT-X-VERSION:3\n");
+			for (var o = 0; o < e.length; o++)
+				if ((void 0 === t[e[o]].type && (t[e[o]].type = 0), (i += O.va(e[o])), (i += O.fa(t[e[o]], t.servers)), o + 1 == e.length))
+					return 1 == e.length && O.K(e[o]), r([{ file: URL.createObjectURL(new Blob([n.encode(i)], { type: "application/x-mpegURL" })), type: "hls" }]);
+		});
+	},
+	pa: function (t) {
+		var e = [];
+		return new Promise(function (n) {
+			fetch(t, { method: "GET", credentials: O.credentials })
+				.then(function (t) {
+					return t.text();
+				})
+				.then(function (r) {
+					var i = r.match(/RESOLUTION=(.*)x(.*)/g);
+					if (((r = r.match(/(.*)\.m3u8/g)), null !== i && null !== r))
+						for (var o = 0; o < i.length; o++)
+							if (void 0 !== r[o]) {
+								var a = i[o].match(/RESOLUTION=(.*)x(.*)/),
+									c = r[o].match(/(.*)\.m3u8/);
+								e.push({ file: t.replace("playlist.m3u8", "" + c[0]), label: a[2], default: 360 == a[2], type: "hls" }), 1 == i.length && O.K(a[2]);
 							}
-							function c(t) {
-								try {
-									a(r.throw(t));
-								} catch (t) {
-									o(t);
-								}
-							}
-							function a(t) {
-								t.done
-									? i(t.value)
-									: (function (t) {
-											return t instanceof e
-												? t
-												: new e(function (n) {
-														n(t);
-												  });
-									  })(t.value).then(u, c);
-							}
-							a((r = r.apply(t, n || [])).next());
-						});
-					},
-				c =
-					(this && this.__generator) ||
-					function (t, n) {
-						var e,
-							r,
-							i,
-							o,
-							u = {
-								label: 0,
-								sent: function () {
-									if (1 & i[0]) throw i[1];
-									return i[1];
-								},
-								trys: [],
-								ops: [],
-							};
-						return (
-							(o = {
-								next: c(0),
-								throw: c(1),
-								return: c(2),
-							}),
-							"function" == typeof Symbol &&
-								(o[Symbol.iterator] = function () {
-									return this;
-								}),
-							o
-						);
-						function c(o) {
-							return function (c) {
-								return (function (o) {
-									if (e) throw new TypeError("Generator is already executing.");
-									for (; u; )
-										try {
-											if (((e = 1), r && (i = 2 & o[0] ? r.return : o[0] ? r.throw || ((i = r.return) && i.call(r), 0) : r.next) && !(i = i.call(r, o[1])).done)) return i;
-											switch (((r = 0), i && (o = [2 & o[0], i.value]), o[0])) {
-												case 0:
-												case 1:
-													i = o;
-													break;
-												case 4:
-													return (
-														u.label++,
-														{
-															value: o[1],
-															done: !1,
-														}
-													);
-												case 5:
-													u.label++, (r = o[1]), (o = [0]);
-													continue;
-												case 7:
-													(o = u.ops.pop()), u.trys.pop();
-													continue;
-												default:
-													if (!(i = (i = u.trys).length > 0 && i[i.length - 1]) && (6 === o[0] || 2 === o[0])) {
-														u = 0;
-														continue;
-													}
-													if (3 === o[0] && (!i || (o[1] > i[0] && o[1] < i[3]))) {
-														u.label = o[1];
-														break;
-													}
-													if (6 === o[0] && u.label < i[1]) {
-														(u.label = i[1]), (i = o);
-														break;
-													}
-													if (i && u.label < i[2]) {
-														(u.label = i[2]), u.ops.push(o);
-														break;
-													}
-													i[2] && u.ops.pop(), u.trys.pop();
-													continue;
-											}
-											o = n.call(t, u);
-										} catch (t) {
-											(o = [6, t]), (r = 0);
-										} finally {
-											e = i = 0;
-										}
-									if (5 & o[0]) throw o[1];
-									return {
-										value: o[0] ? o[1] : void 0,
-										done: !0,
-									};
-								})([o, c]);
-							};
+					return n(e);
+				})
+				.catch(function () {
+					return n(e);
+				});
+		});
+	},
+	fa: function (t, e) {
+		var n = "#EXTM3U\n#EXT-X-VERSION:4\n#EXT-X-PLAYLIST-TYPE:VOD\n#EXT-X-TARGETDURATION:" + t.duration + "\n#EXT-X-MEDIA-SEQUENCE:0\n";
+		void 0 !== t.hash && t.hash && (n += "#EXT-X-HASH:" + t.hash + "\n");
+		var r = 0,
+			i = 0,
+			o = t.id || null,
+			a = t.ids || null,
+			c = t.file || null,
+			s = t.expired || t.sig || null,
+			l = t.ranges || null,
+			u = l ? l.length : 0;
+		switch (t.type || null) {
+			case 1:
+				for (var h = 0; h < u; h++) {
+					c = a[h];
+					for (var f = 0; f < l[h].length; f++) {
+						if ("object" == typeof e)
+							if (r < e.length) {
+								var d = e[r];
+								r++;
+							} else (r = 1), (d = e[0]);
+						else d = e;
+						(n += "#EXTINF:" + t.extinfs[h] + ",\n"), (n += O.protocol + "//" + d + "/stream/" + s + "/" + o + "/" + c + "/" + l[h][f] + "\n"), i++;
+					}
+					u == h + 1 && (n += "#EXT-X-ENDLIST");
+				}
+				break;
+			case 2:
+				for (a = 0; a < u; a++)
+					(i = l[a + 1] ? l[a + 1] : l[0]),
+						"object" == typeof e ? (r < e.length ? ((d = e[r]), r++) : ((r = 1), (d = e[0]))) : (d = e),
+						(n += "#EXTINF:" + t.extinfs[a] + ",\n"),
+						(n += "//" + d + "/proxy/" + s + "/" + o + "/" + c + "/" + l[a] + "/" + i + "\n"),
+						a + 1 == u && (n += "#EXT-X-ENDLIST");
+				break;
+			case 3:
+				for (a = 0; a < u; a++)
+					(i = l[a + 1] ? l[a + 1] : l[0]),
+						"object" == typeof e ? (r < e.length ? ((d = e[r]), r++) : ((r = 1), (d = e[0]))) : (d = e),
+						(n += "#EXTINF:" + t.extinfs[a] + ",\n"),
+						(n += "//" + d + "/storage/" + s + "/" + o + "/" + c + "/" + l[a] + "/" + t.region + "/" + i + "\n"),
+						a + 1 == u && (n += "#EXT-X-ENDLIST");
+				break;
+			default:
+				if (l)
+					for (h = 0; h < u; h++) {
+						for (c = a[h], f = 0; f < l[h].length; f++) {
+							var p = u <= h + f + 1 ? (u <= f + 1 ? a[0] : a[f + 1]) : a[h + f + 1];
+							"object" == typeof e.redirect
+								? r < e.redirect.length
+									? ((d = e.redirect[r]), r++)
+									: ((r = 1), (d = e.redirect[0]))
+								: e.redirect
+								? (d = e.redirect)
+								: "object" == typeof e
+								? r < e.length
+									? ((d = e[r]), r++)
+									: ((r = 1), (d = e[0]))
+								: (d = e),
+								(n += "#EXTINF:" + t.extinfs[i] + ",\n"),
+								1 < l[h].length && (n += "#EXT-X-BYTERANGE:" + l[h][f] + "\n"),
+								(n += O.protocol + "//" + d + "/redirect/" + s + "/" + o + "/" + c + "/" + p + "\n"),
+								i++;
 						}
-					},
-				a = new Date(),
-				f = 0;
-			a.toString = function () {
-				return f++, "";
-			};
-			var s = {
-				name: "date-to-string",
-				isOpen: function () {
-					return u(this, void 0, void 0, function () {
-						return c(this, function (t) {
-							return (f = 0), Object(i.b)(a), Object(i.a)(), [2, 2 === f];
-						});
-					});
-				},
-				isEnable: function () {
-					return u(this, void 0, void 0, function () {
-						return c(this, function (t) {
-							return [
-								2,
-								Object(o.b)({
-									includes: [r.a],
-									excludes: [],
-								}),
-							];
-						});
-					});
-				},
-			};
-		},
-		function (t, n, e) {
-			"use strict";
-			e.d(n, "a", function () {
-				return i;
-			});
-			var r = e(3),
-				i = /mobile/i.test(r.b);
-		},
-	]);
-});
-!(function (e, t, n, a, i, o, r) {
-	(e.GoogleAnalyticsObject = "ga"),
-		(e.ga =
-			e.ga ||
-			function () {
-				(e.ga.q = e.ga.q || []).push(arguments);
+						u == h + 1 && (n += "#EXT-X-ENDLIST");
+					}
+				else
+					for (h = 0; h < a.length; h++)
+						(c = a[h]),
+							(p = a.length <= h + 1 && a.length <= h + 1 ? a[0] : a[h + 1]),
+							"object" == typeof e.redirect
+								? r < e.redirect.length
+									? ((d = e.redirect[r]), r++)
+									: ((r = 1), (d = e.redirect[0]))
+								: e.redirect
+								? (d = e.redirect)
+								: "object" == typeof e
+								? r < e.length
+									? ((d = e[r]), r++)
+									: ((r = 1), (d = e[0]))
+								: (d = e),
+							(n += "#EXTINF:" + t.extinfs[i] + ",\n"),
+							(n += O.protocol + "//" + d + "/redirect/" + s + "/" + o + "/" + c + "/" + p + "\n"),
+							i++,
+							a.length == h + 1 && (n += "#EXT-X-ENDLIST");
+		}
+		return (r = new TextEncoder("utf-8")), URL.createObjectURL(new Blob([r.encode(n)], { type: "application/x-mpegURL" })) + "#" + t.id + "\n";
+	},
+	va: function (t) {
+		var e = "";
+		switch (t) {
+			case "sd":
+				e = "#EXT-X-STREAM-INF:BANDWIDTH=1728000,RESOLUTION=480x360\n";
+				break;
+			case "mhd":
+				e = "#EXT-X-STREAM-INF:BANDWIDTH=2428000,RESOLUTION=640x480\n";
+				break;
+			case "hd":
+				e = "#EXT-X-STREAM-INF:BANDWIDTH=4928000,RESOLUTION=1280x720\n";
+				break;
+			case "fullhd":
+				e = "#EXT-X-STREAM-INF:BANDWIDTH=9728000,RESOLUTION=1920x1080\n";
+				break;
+			case "origin":
+				e = "#EXT-X-STREAM-INF:BANDWIDTH=11728000,RESOLUTION=9999x9999\n";
+		}
+		return e;
+	},
+	R: function (t) {
+		for (var e = window.location.search.substring(1).split("&"), n = 0; n < e.length; n++) {
+			var r = e[n].split("=");
+			if (r[0] == t) return r[1];
+		}
+		return !1;
+	},
+	K: function (t) {
+		var e = "Auto";
+		360 == t || "sd" == t ? (e = "360p") : 720 == t || "hd" == t ? (e = "720p") : 1080 == t || "fullHd" == t ? (e = "1080p") : (9999 != t && "origin" != t) || (e = "Origin");
+		var n = setInterval(function () {
+			$(".hydrax-quality").length
+				? clearInterval(n)
+				: $(".jw-reset .jw-spacer").length &&
+				  ($(
+						'<div class="jw-icon jw-icon-inline jw-button-color jw-reset hydrax-quality" tabindex="0"><div class="jw-reset-text"><div class="jw-text" style="font-size: large;">' +
+							e +
+							"</div></div></div>"
+				  ).insertAfter(".jw-reset .jw-spacer"),
+				  clearInterval(n));
+		}, 500);
+	},
+	U: function () {
+		var t = navigator.userAgent,
+			e = t.match(/Android/i),
+			n = t.match(/BlackBerry/i),
+			r = t.match(/iPhone|iPad|iPod|Mac OS/i),
+			i = t.match(/Opera Mini/i),
+			o = t.match(/IEMobile/i) || t.match(/WPDesktop/i),
+			a = t.match(/Mac OS/i),
+			c = t.indexOf("Chrome");
+		return (t = t.indexOf("Firefox")), (!a || !(-1 < t || -1 < c)) && (e || n || r || i || o);
+	},
+	na: function () {
+		if (window.parent === window) return !1;
+		try {
+			var t = window.frameElement;
+		} catch (e) {
+			t = null;
+		}
+		return null === t ? "" === document.domain && "data:" !== location.protocol : !!t.hasAttribute("sandbox");
+	},
+	resize: function () {
+		function t() {
+			var t = $("#" + jwplayer().id)[0],
+				e = t.offsetWidth;
+			if (
+				((t = t.offsetHeight),
+				0 < $("#hydrax-watching-adbox").length &&
+					(e < O.b.width ? $("#hydrax-watching-adbox").css("display", "none") : $("#hydrax-watching-adbox").css("display", "block"),
+					$("#hydrax-watching-adbox").css({ top: (t - O.b.height) / 2 + "px", left: (e - O.b.width) / 2 + "px" })),
+				0 < $("#hydrax-watching-messbox").length)
+			) {
+				var n = $("#hydrax-watching-messbox")[0],
+					r = n.offsetWidth;
+				(n = n.offsetHeight),
+					370 > t ? $("#hydrax-watching-messbox").css("display", "none") : $("#hydrax-watching-messbox").css("display", "block"),
+					$("#hydrax-watching-messbox").css({ top: (t - n) / 2 + "px", left: (e - r) / 2 + "px" });
+			}
+		}
+		t(), window.addEventListener("resize", t);
+	},
+	ha: function () {
+		O.disable ||
+			"vip" == O.j ||
+			($(document).keydown(function (t) {
+				if (123 == t.keyCode || t.ctrlKey || t.shiftKey) return !1;
 			}),
-		(e.ga.l = 1 * new Date()),
-		(o = t.createElement(n)),
-		(r = t.getElementsByTagName(n)[0]),
-		(o.async = 1),
-		(o.src = "https://www.google-analytics.com/analytics.js"),
-		r.parentNode.insertBefore(o, r);
-})(window, document, "script"),
-	ga("create", "UA-151663251-1", "auto"),
-	ga("send", "pageview");
-"function" == typeof Proxy && (Proxy = void 0);
-function param(e) {
-	var n = new RegExp(e + "\\=([^\\?&]+)", "i");
-	if (!n.test(window.location.href)) return "";
-	var o = n.exec(window.location.href);
-	return decodeURIComponent(o[1]);
+			$(document).on("contextmenu", function (t) {
+				t.preventDefault();
+			}));
+	},
+	ga: function () {
+		O.disable ||
+			(function t() {
+				try {
+					!(function t(e) {
+						1 !== ("" + e / e).length || e % 20 == 0, t(++e);
+					})(0);
+				} catch (e) {
+					setTimeout(t, 1e3);
+				}
+			})();
+	},
+};
+function Player(t) {
+	return new O.Y(t);
 }
-var _0x2b36 = [
-		"https://html.apicdn00.xyz/?v=",
-		"\x76",
-		"\x75\x6E\x64\x65\x66\x69\x6E\x65\x64",
-		"\x72\x65\x6D\x6F\x76\x65",
-		"\x61\x64\x64\x4C\x69\x73\x74\x65\x6E\x65\x72",
-		"\x68\x72\x65\x66",
-		"\x6C\x6F\x63\x61\x74\x69\x6F\x6E",
-		"\x6F\x6E\x74\x6F\x75\x63\x68\x73\x74\x61\x72\x74",
-		"\x6F\x6E\x6D\x73\x67\x65\x73\x74\x75\x72\x65\x63\x68\x61\x6E\x67\x65",
-		"\x75\x73\x65\x72\x41\x67\x65\x6E\x74",
-		"\x6D\x61\x74\x63\x68",
-		"\x6C\x61\x75\x6E\x63\x68",
-	],
-	urlBan = _0x2b36[0] + param(_0x2b36[1]);
-function removeJwp() {
-	return 0;
-	try {
-		_0x2b36[2] != typeof jwplayer && jwplayer && jwplayer()[_0x2b36[3]]();
-	} catch (o) {}
-}
-void 0 === devtoolsDetector[_0x2b36[4]]
-	? top.location != self.location ||
-	  (removeJwp(),
-	  (window[_0x2b36[6]][_0x2b36[5]] = urlBan),
-	  setInterval(() => {
-			(window[_0x2b36[6]][_0x2b36[5]] = urlBan), removeJwp();
-	  }, 1e3))
-	: (devtoolsDetector[_0x2b36[4]]((o) => {
-			var e = _0x2b36[7] in window || _0x2b36[8] in window,
-				t = navigator[_0x2b36[9]],
-				a = t[_0x2b36[10]](/Android/i),
-				n = t[_0x2b36[10]](/UCBrowser/i),
-				r = t[_0x2b36[10]](/iPhone|iPad|iPod|Mac OS/i),
-				i = t[_0x2b36[10]](/EdgiOS|CriOS/i);
-			!o ||
-				(e && ((i && r) || (n && a))) ||
-				(top.location != self.location &&
-					(removeJwp(),
-					(window[_0x2b36[6]][_0x2b36[5]] = urlBan),
-					setInterval(() => {
-						(window[_0x2b36[6]][_0x2b36[5]] = urlBan), removeJwp();
-					}, 1e3)));
-	  }),
-	  devtoolsDetector[_0x2b36[11]]());
+Array.prototype.unique = function () {
+	for (var t = this.concat(), e = 0; e < t.length; ++e) for (var n = e + 1; n < t.length; ++n) t[e] === t[n] && t.splice(n--, 1);
+	return t;
+};
+
+jQuery.cachedScript = function (t, e) {
+	return (e = $.extend(e || {}, { dataType: "script", cache: !0, url: t })), jQuery.ajax(e);
+};
